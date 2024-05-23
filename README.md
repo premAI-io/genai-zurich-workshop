@@ -54,7 +54,6 @@ kind delete cluster --name kind-genai-zurich
 
 ## Build a RAG with Prem 1B Chat
 
-> PLACEHOLDER FOR ROHIT
 1. Go to rag_demo folder
 
 ```bash

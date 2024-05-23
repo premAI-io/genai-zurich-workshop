@@ -72,3 +72,12 @@ pip install -r requirements.txt
 ```bash
 jupyter lab
 ```
+
+Some questions to try out
+```
+1. How does the proposed directive address the challenges related to the application of the Product Liability Directive (PLD) to products in the modern digital economy, specifically in relation to software and AI-enabled products?
+2. What are the proposed changes to the limitations on making compensation claims, such as the threshold for property damage and the period of liability for manufacturers?
+3. How does the NIS 2 Directive (Directive (EU) 2022/2555) ensure a high common level of cybersecurity across the Union, and what are the specific obligations for Member States in terms of national cybersecurity strategies?
+4. How does the Data Act ensure the protection of trade secrets when data holders are required to share data with users or third parties, and what measures can data holders take to preserve the confidentiality of their trade secrets?
+5. What measures are proposed to ease the burden of proof for injured persons in complex cases involving pharmaceuticals, smart products, or AI-enabled products?
+```

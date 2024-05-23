@@ -55,3 +55,20 @@ kind delete cluster --name kind-genai-zurich
 ## Build a RAG with Prem 1B Chat
 
 > PLACEHOLDER FOR ROHIT
+1. Go to rag_demo folder
+
+```bash
+cd rag_demo
+```
+
+2. Install the requirements:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Start jupyter lab and run the noteboook:
+
+```bash
+jupyter lab
+```

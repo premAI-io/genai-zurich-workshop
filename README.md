@@ -32,7 +32,13 @@ kind get clusters
 kubectl cluster-info --context kind-genai-zurich
 ```
 
-1. Delete the cluster 
+4. Install Prem Operator
+
+```bash
+helm install latest oci://registry-1.docker.io/premai/prem-operator-chart
+```
+
+5. Delete the cluster 
 
 ```bash
 kind delete cluster --name kind-genai-zurich 

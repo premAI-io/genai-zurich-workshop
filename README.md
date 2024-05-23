@@ -38,7 +38,15 @@ kubectl cluster-info --context kind-genai-zurich
 helm install latest oci://registry-1.docker.io/premai/prem-operator-chart
 ```
 
-5. Delete the cluster 
+5. Deploy the Phi-2 + Elia CPU example and exec Elia in a terminal session
+
+```bash
+cd ./prem-operator
+kubectl apply -f examples/elia-tui-cpu.yaml
+kubectl exec -it deployments/elia elia
+```
+
+6. Delete the cluster when you are done experimenting
 
 ```bash
 kind delete cluster --name kind-genai-zurich 

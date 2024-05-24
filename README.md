@@ -9,48 +9,74 @@
 3. Launch the Best Model and configurations
 4. Integrate Prem in your Product with our official SDKs
 
-## Deploy a Model in your Infrastructure with Prem Operator 
+## Deploy a Model in your Infrastructure with Prem Operator
 
-0. Create a Paperspace instance and Install `kind` and `kubectl`
+0. Create a Paperspace instance, install Kubernetes (K3s) and various utilities
+
+> You can install the utilities (k3sup, kubectl, helm, etc.) on your local machine if you prefer.
+> Below we show installing everything on the remote machine while logged in via SSH
 
 ```bash
+# Install k3sup
+curl -sLS https://get.k3sup.dev | sh
+sudo install k3sup /usr/local/bin
+
+# Install k3s
+# NOTE: Replace --local with the --ip/--host to install k3s remotely
+k3sup install --local --local-path $HOME/.kube/config
+
 # Install kubectl
 sudo apt update
 sudo snap install kubectl --classic
 kubectl version --client
 
-# Install kind
-# For AMD64 / x86_64
-[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
-# For ARM64
-[ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-arm64
-chmod +x ./kind
-sudo mv ./kind /usr/local/bin/kind
+# Check the cluster is configured
+kubectl get nodes
+# NOTE: if this doesn't return a node, you can also try the following
+sudo k3s kubectl get nodes
 
 # Install Helm
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod +x get_helm.sh
 ./get_helm.sh
 helm version
+
+# Optionally install k9s as a TUI alternative to kubectl
+curl -OL https://github.com/derailed/k9s/releases/download/v0.32.4/k9s_linux_amd64.deb
+sudo apt install ./k9s_linux_amd64.deb
 ```
 
-1. Clone the prem-operator repository
+1. [Install the NVIDIA Operator](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html)
+
+```bash
+
+# Remove any pre-installed NVIDIA drivers and container runtime
+sudo apt purge cuda-*
+sudo apt purge nvidia-*
+sudo apt autoremove
+sudo apt autoclean
+
+# Downgrade the Linux kernel because of https://forums.developer.nvidia.com/t/nvidia-modeset-unknown-symbol-on-module-load-error/239848
+sudo apt install linux-image-5.15.0-107-generic
+sudo apt remove linux-image-generic-hwe-22.04
+sudo apt remove linux-image-6.2.0-37-generic
+# Reboot to load the new kernel
+sudo systemctl reboot
+
+# Install the NVIDIA operator
+helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
+helm repo update
+helm install --wait --generate-name -n gpu-operator --create-namespace --set driver.version=550-5.15.0-107 --set driver.usePrecompiled=true nvidia/gpu-operator
+
+# wait for the driver to be installed, this is where k9s is useful...
+# if the NVIDIA pods for the driver and runtime succeed, but the other pods are stuck in init then restart
+sudo systemctl reboot
+```
+
+2. Clone the prem-operator repository
 
 ```bash
 git clone https://github.com/premAI-io/prem-operator.git
-```
-
-2. Create a cluster with Kind
-
-```bash
-kind create cluster --name genai-zurich
-```
-
-2. Check if the cluster has been created and configure the default context
-
-```bash
-kind get clusters
-kubectl cluster-info --context kind-genai-zurich
 ```
 
 3. Install Prem Operator
@@ -63,14 +89,20 @@ helm install latest oci://registry-1.docker.io/premai/prem-operator-chart
 
 ```bash
 cd ./prem-operator
-kubectl apply -f examples/elia-tui.yaml
-kubectl exec -it deployments/elia elia
+kubectl apply -f examples/llama3-8b-gguf.yaml
+# Grab a coffee while the container downloads
+kubectl exec -it deployments/llama-3-tui -- elia
+# Type a message and wait a little more for the model to load
 ```
 
-5. Delete the cluster when you are done experimenting
+5. Remove the example deployment and Prem Operator
 
 ```bash
-kind delete cluster --name kind-genai-zurich 
+kubectl delete aideployment/llama-3-8b-gguf
+kubectl delete aimodelmap/llama-3-8b-gguf
+kubectl delete deployment/llama-3-cli
+kubectl delete deployment/llama-3-tui
+helm uninstall latest
 ```
 
 ## Build a RAG with Prem 1B Chat

@@ -11,42 +11,63 @@
 
 ## Deploy a Model in your Infrastructure with Prem Operator 
 
+0. Create a Paperspace instance and Install `kind` and `kubectl`
+
+```bash
+# Install kubectl
+sudo apt update
+sudo snap install kubectl --classic
+kubectl version --client
+
+# Install kind
+# For AMD64 / x86_64
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
+# For ARM64
+[ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-arm64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+
+# Install Helm
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod +x get_helm.sh
+./get_helm.sh
+helm version
+```
+
 1. Clone the prem-operator repository
 
 ```bash
-git clone git@github.com:premAI-io/prem-operator.git
+git clone https://github.com/premAI-io/prem-operator.git
 ```
 
 2. Create a cluster with Kind
-
-> Depending on your operating system you can install kind in different ways. Learn more here: https://kind.sigs.k8s.io/docs/user/quick-start/#installing-with-a-package-manager. If you have a Mac, you can simply run `brew install kind`
 
 ```bash
 kind create cluster --name genai-zurich
 ```
 
-3. Check if the cluster has been created and configure the default context
+2. Check if the cluster has been created and configure the default context
 
 ```bash
 kind get clusters
 kubectl cluster-info --context kind-genai-zurich
 ```
 
-4. Install Prem Operator
+3. Install Prem Operator
 
 ```bash
 helm install latest oci://registry-1.docker.io/premai/prem-operator-chart
 ```
 
-5. Deploy the Phi-2 + Elia CPU example and exec Elia in a terminal session
+4. Deploy the Phi-2 + Elia CPU example and exec Elia in a terminal session
 
 ```bash
 cd ./prem-operator
-kubectl apply -f examples/elia-tui-cpu.yaml
+kubectl apply -f examples/elia-tui.yaml
 kubectl exec -it deployments/elia elia
 ```
 
-6. Delete the cluster when you are done experimenting
+5. Delete the cluster when you are done experimenting
 
 ```bash
 kind delete cluster --name kind-genai-zurich 

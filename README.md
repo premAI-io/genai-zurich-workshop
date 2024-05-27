@@ -9,6 +9,13 @@
 3. Launch the Best Model and configurations
 4. Integrate Prem in your Product with our official SDKs
 
+We prepared a script in order to interact with the assistant we created through Prem Platform.
+
+```bash
+cd ./rag_demo
+python chat_saas.py
+```
+
 ## Deploy a Model in your Infrastructure with Prem Operator
 
 0. Create a Paperspace instance, install Kubernetes (K3s) and various utilities

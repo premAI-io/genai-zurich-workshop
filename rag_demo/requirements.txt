@@ -5,3 +5,4 @@ langchain-community==0.2.0
 pypdf==4.2.0
 sentence-transformers==2.7.0
 tqdm==4.66.4
+premai==0.3.55

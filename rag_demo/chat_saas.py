@@ -14,8 +14,10 @@ client = Prem(
 system_prompt = "You are an helpful assistant, optimized for RAG. Please answer the user question, based on the given context. But avoid sentences like 'based on the given context' in the response."
 
 messages = [
-    {"role": "user",
-        "content": "How does the NIS 2 Directive (Directive (EU) 2022/2555) ensure a high common level of cybersecurity across the Union, and what are the specific obligations for Member States in terms of national cybersecurity strategies?"}
+    {
+        "role": "user",
+        "content": "What is the key feature of ChatEval compared to other evaluation strategies?"
+    }
 ]
 
 project_id = 4455

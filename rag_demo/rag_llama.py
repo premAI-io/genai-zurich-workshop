@@ -3,7 +3,7 @@ from utils import bcolors
 
 
 client = Prem(
-    api_key="qt7K7crvkAGwBQ3fK1k9rBeZrfaiXDpAfT"
+    api_key="your_api_key",
 )
 
 system_prompt = "You are an helpful assistant, optimized for RAG. Please answer the user question, based on the given context. But avoid sentences like 'based on the given context' in the response."

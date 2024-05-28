@@ -136,5 +136,12 @@ jupyter lab
 
 - What is the key feature of ChatEval compared to the other evaluation strategies?
 
-> ChatEval is a multi-agent system employed for evaluation of LLMs
+> ChatEval is a **multi-agent system** employed for evaluation of LLMs
 
+- What is the key results obtained by Prometheus 2, regarding the evaluation of LLMs?
+
+> On four direct assessment benchmarks and four pairwise ranking benchmarks, PROMETHEUS 2 scores the highest correlation and agreement with humans and proprietary LM judges among all tested open evaluator LMs. 
+
+- How does the Infini-attention technique aim to address the problem related to limited context in generative models?
+
+> The Infini-attention incorporates a compressive memory into the vanilla attention mechanism and builds in both masked local attention and long-term linear attention mechanisms in a single Transformer block.

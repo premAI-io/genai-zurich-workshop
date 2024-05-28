@@ -37,7 +37,10 @@ for content_message in content_messages:
 	)
 	print(bcolors.OKCYAN + messages[0]['content'] + bcolors.ENDC)
 	print(bcolors.OKBLUE + response.choices[0].message.content + bcolors.ENDC)
-	print(bcolors.BOLD + "Similarity scores: " + ';'.join(str(round(chunk.similarity_score, 2)) for chunk in response.document_chunks) + bcolors.ENDC)
+	print(bcolors.BOLD + \
+	      "Similarity scores: " + \
+	      ';'.join(str(round(chunk.similarity_score, 2)) for chunk in response.document_chunks) + \
+		  bcolors.ENDC)
 	print("------------------------------------------------")
 
 
@@ -53,5 +56,8 @@ for bad_content_message in bad_content_messages:
 	)
 	print(bcolors.OKCYAN + messages[0]['content'] + bcolors.ENDC)
 	print(bcolors.FAIL + response.choices[0].message.content + bcolors.ENDC)
-	print(bcolors.BOLD + bcolors.WARNING + "Similarity scores: " + ';'.join(str(round(chunk.similarity_score, 2)) for chunk in response.document_chunks) + bcolors.ENDC)
+	print(bcolors.BOLD + bcolors.WARNING + \
+	      "Similarity scores: " + \
+		  ';'.join(str(round(chunk.similarity_score, 2)) for chunk in response.document_chunks) + \
+		  bcolors.ENDC)
 	print("------------------------------------------------")

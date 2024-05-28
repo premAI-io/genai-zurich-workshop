@@ -1,6 +1,8 @@
+import os
+
 from premai import Prem
 from dotenv import load_dotenv
-import os
+
 
 load_dotenv()
 

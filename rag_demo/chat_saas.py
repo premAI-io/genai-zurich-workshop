@@ -6,9 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-client = Prem(
-    api_key=os.getenv("PREMAI_API_KEY"),
-)
+client = Prem(api_key=os.environ["PREMAI_API_KEY"])
 
 
 system_prompt = "You are a helpful assistant, optimized for RAG. Please answer the user question, based on the given context. But avoid sentences like 'based on the given context' in the response."
@@ -20,7 +18,7 @@ messages = [
     }
 ]
 
-project_id = 4455
+project_id = 4508
 
 
 # Create completion

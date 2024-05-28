@@ -14,7 +14,8 @@ client = Prem(
 system_prompt = "You are an helpful assistant, optimized for RAG. Please answer the user question, based on the given context. But avoid sentences like 'based on the given context' in the response."
 
 messages = [
-    {"role": "user", "content": "What measures are proposed to ease the burden of proof for injured persons in complex cases involving pharmaceuticals, smart products, or AI-enabled products?"}
+    {"role": "user",
+        "content": "How does the NIS 2 Directive (Directive (EU) 2022/2555) ensure a high common level of cybersecurity across the Union, and what are the specific obligations for Member States in terms of national cybersecurity strategies?"}
 ]
 
 project_id = 4455

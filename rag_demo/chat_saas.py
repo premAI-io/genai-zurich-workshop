@@ -1,7 +1,11 @@
 from premai import Prem
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 client = Prem(
-    api_key=""
+    api_key=os.getenv("PREMAI_API_KEY"),
 )
 
 

@@ -11,7 +11,7 @@ client = Prem(
 )
 
 
-system_prompt = "You are an helpful assistant, optimized for RAG. Please answer the user question, based on the given context. But avoid sentences like 'based on the given context' in the response."
+system_prompt = "You are a helpful assistant, optimized for RAG. Please answer the user question, based on the given context. But avoid sentences like 'based on the given context' in the response."
 
 messages = [
     {

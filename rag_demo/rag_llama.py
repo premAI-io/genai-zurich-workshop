@@ -1,9 +1,12 @@
 from premai import Prem
 from utils import bcolors
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 client = Prem(
-    api_key="your_api_key",
+    api_key=os.getenv("PREMAI_API_KEY"),
 )
 
 system_prompt = "You are an helpful assistant, optimized for RAG. Please answer the user question, based on the given context. But avoid sentences like 'based on the given context' in the response."

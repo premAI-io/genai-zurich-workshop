@@ -138,7 +138,7 @@ jupyter lab --allow-root
 
 > ChatEval is a **multi-agent system** employed for evaluation of LLMs
 
-- What is the key results obtained by Prometheus 2, regarding the evaluation of LLMs?
+- What is the key result obtained by Prometheus 2, regarding the evaluation of LLMs?
 
 > On four direct assessment benchmarks and four pairwise ranking benchmarks, PROMETHEUS 2 scores the highest correlation and agreement with humans and proprietary LM judges among all tested open evaluator LMs. 
 

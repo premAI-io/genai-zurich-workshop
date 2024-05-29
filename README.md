@@ -129,7 +129,7 @@ pip install -r requirements.txt
 3. Start jupyter lab and run the noteboook:
 
 ```bash
-jupyter lab
+jupyter lab --allow-root
 ```
 
 ## Some questions to try out

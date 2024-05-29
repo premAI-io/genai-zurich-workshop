@@ -9,7 +9,7 @@ load_dotenv()
 client = Prem(api_key=os.environ["PREMAI_API_KEY"])
 
 
-system_prompt = "You are a helpful assistant, optimized for RAG. Please answer the user question, based on the given context. But avoid sentences like 'based on the given context' in the response."
+system_prompt = "You are a helpful assistant, optimized for RAG. Please answer the user question, based on the given context. But avoid sentences like 'based on the given context' in the response. Try to use the context, as much as you can, but again: AVOID USING SENTENCES THAT CONTAIN THE WORD 'CONTEXT'"
 
 messages = [
     {
